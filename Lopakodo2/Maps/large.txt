@@ -1,0 +1,17 @@
+﻿16
+F F F F F K F F F F F F F F F F
+F P P P P P P P P P P P P P P F
+F P P P P P P P P P P P P P P F
+F F F F F F F P P P O P P P P F
+F P P P P P P P P P P P P P P F
+F P P P P P P P P P F F F F F F
+F P P P P P P P P P F P P P P F
+F F P F P F P P P P F P P P P F
+F P P P P P P P F F F P P P P F
+F P P P P P P P P P P P P P P F
+F P P P P P P P P P F F F F F F
+F P P F P P P P P P P P F P P F
+F P P F P P P P P P P P F P P F
+F P P F P P P F F P P P P P P F
+F P P P P J P P F P P P P P P F
+F F F F F F F F F F F F F F F F

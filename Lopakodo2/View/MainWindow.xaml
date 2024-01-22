@@ -1,0 +1,90 @@
+﻿<Window x:Class="Stealthy.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Stealthy.View"
+        mc:Ignorable="d"
+        Title="Lopakodo játék" Height="450" Width="750" MinHeight="450" MinWidth="600">
+    <Window.InputBindings>
+        <KeyBinding Key="W" Command="{Binding UpMoveCommand}" />
+        <KeyBinding Key="Up" Command="{Binding UpMoveCommand}" />
+        <KeyBinding Key="S" Command="{Binding DownMoveCommand}" />
+        <KeyBinding Key="Down" Command="{Binding DownMoveCommand}" />
+        <KeyBinding Key="D"  Command="{Binding RightMoveCommand}" />
+        <KeyBinding Key="Right"  Command="{Binding RightMoveCommand}" />
+        <KeyBinding Key="A" Command="{Binding LeftMoveCommand}"/>
+        <KeyBinding Key="Left" Command="{Binding LeftMoveCommand}"/>
+    </Window.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="Menü">
+                <MenuItem Header="Új játék">
+                    <MenuItem Header="Kicsi pálya" IsCheckable="True" IsChecked="{Binding IsSmall}" Command="{Binding NewGameSmallCommand}" />
+                    <MenuItem Header="Közepes pálya" IsCheckable="True" IsChecked="{Binding IsMedium}" Command="{Binding NewGameMediumCommand}"/>
+                    <MenuItem Header="Nagy pálya" IsCheckable="True" IsChecked="{Binding IsLarge}" Command="{Binding NewGameLargeCommand}"/>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Megallit" Command="{Binding PauseCommand}" />
+                <MenuItem Header="Újraindít" Command="{Binding StartCommand}" />
+                <Separator />
+                <MenuItem Header="Kilépés" Command="{Binding ExitCommand}" />
+            </MenuItem>
+        </Menu>
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding Fields}">
+            <!--az mezőket tároló vezérlő-->
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <!--a gombokat egy rácsba fűzzük fel-->
+                    <UniformGrid Rows="{Binding TableSize}" Columns="{Binding TableSize}" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <!--az elemek gombok lesznek-->
+                <DataTemplate>
+                    <Button Content="" Focusable="False" RenderTransformOrigin="0.5, 0.5" FontSize="24" FontWeight="Bold" IsEnabled="True" IsHitTestVisible="False">
+                        <Button.RenderTransform>
+                            <ScaleTransform ScaleX="1" ScaleY="1" />
+                        </Button.RenderTransform>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Elem}" Value="F">
+                                        <Setter Property="Background" Value="Brown" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Elem}" Value="P">
+                                        <Setter Property="Background" Value="Lavender" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Elem}" Value="J">
+                                        <Setter Property="Background" Value="Gold" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Elem}" Value="K">
+                                        <Setter Property="Background" Value="White" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Elem}" Value="O">
+                                        <Setter Property="Background" Value="Blue" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:00:02" From="0" To="1" Storyboard.TargetProperty="Opacity" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</Window>
